@@ -22,6 +22,9 @@ const recipeSchema = new Schema({
         type: Number,
         required: true,
     },
+    rating: {
+        type:Number
+    },
     calories: {
         type: Number,
     },

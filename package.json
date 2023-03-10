@@ -1,0 +1,20 @@
+{
+  "name": "chatbite",
+  "version": "1.0.0",
+  "description": "AI-powered web app for generating and sharing cooking recipes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jakester101/ChatBite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jakester101/ChatBite/issues"
+  },
+  "homepage": "https://github.com/jakester101/ChatBite#readme"
+}

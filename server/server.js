@@ -1,5 +1,5 @@
 const express = require('express');
-const {ApolloServer, gql} = require('appolo-server-express');
+const {ApolloServer, gql} = require('apollo-server-express');
 const path = require('path');
 const {typeDefs, resolvers} = require('./schemas');
 const db = require('./config/connection');

@@ -10,7 +10,7 @@ const recipeSchema = new Schema({
             type: String, required: true
         },
         quantity: {
-            type: string,
+            type: String,
             required: true,
         }
     }],

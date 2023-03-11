@@ -6,19 +6,28 @@ const recipesData = require('./recipesSeeds.json')
 
 
 db.once('open', async () => {
-    User.insertMany(usersData)
-        .then(() => {
-        console.log('Inserted users data')
-    })
-        .catch((err) => {
-        console.error(err);
-});
+    try {
+        // deletes all the previous data inside the collections
+        await Recipe.deleteMany({});
+        await User.deleteMany({});
 
-    Recipe.insertMany(recipesData)
-        .then(() => {
-        console.log('Inserted recipes data')
-    })
-        .catch((err) => {
-        console.error(err);
-});
+        await User.create(usersData);
+
+        for (let i = 0; i < recipesData.length; i++) {
+            const { _id, createdBy } = await Recipe.create(recipesData[i]);
+            const user = await User.findOneAndUpdate(
+                { username: createdBy },
+                {
+                    $addToSet: {
+                        recipes: _id,
+                    },
+                }
+            );
+        }
+    } catch (e) {
+        console.error(e);
+        process.exit(1);
+    }
+    console.log('all done');
+    process.exit(0);
 })

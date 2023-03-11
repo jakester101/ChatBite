@@ -1,60 +1,62 @@
 [
-    {
-      "name": "Spaghetti Carbonara",
-      "ingredients": [
-        {
-          "name": "spaghetti",
-          "quantity": "1 pound"
-        },
-        {
-          "name": "bacon",
-          "quantity": "8 ounces"
-        },
-        {
-          "name": "garlic",
-          "quantity": "2 cloves"
-        },
-        {
-          "name": "eggs",
-          "quantity": "2"
-        },
-        {
-          "name": "Parmesan cheese",
-          "quantity": "1/2 cup"
-        }
-      ],
-      "instructions": "1. Cook spaghetti according to package instructions. Fry bacon in a pan until crispy. 2. In a separate bowl, whisk eggs and Parmesan cheese together. 3. Drain the spaghetti and add it to the pan with the bacon. Turn off the heat. 4. Add the egg and cheese mixture to the spaghetti and bacon, stirring until the spaghetti is coated in the mixture. 5. Serve hot.",
-      "rating": 4,
-      "time": 30,
-      "calories": 500
-    },
-    {
-      "name": "Chicken Fajitas",
-      "ingredients": [
-        {
-          "name": "chicken breasts",
-          "quantity": "1 pound"
-        },
-        {
-          "name": "onion",
-          "quantity": "1"
-        },
-        {
-          "name": "bell pepper",
-          "quantity": "1"
-        },
-        {
-          "name": "tortillas",
-          "quantity": "8"
-        },
-        {
-          "name": "salsa",
-          "quantity": "1 cup"
-        }
-      ],
-      "instructions": "1. Cut the chicken breasts into strips. Slice the onion and bell pepper. 2. In a pan, heat up some oil over medium-high heat. Add the chicken strips and cook until browned. 3. Add the sliced onion and bell pepper to the pan and continue cooking until vegetables are soft. 4. Warm up the tortillas in a separate pan or in the microwave. 5. Serve the chicken fajitas on the warm tortillas with salsa on the side.",
-      "rating": 2,
-      "time": 45,
-      "calories": 400
-    }
+  {
+    "name": "Spaghetti Carbonara",
+    "ingredients": [
+      {
+        "name": "spaghetti",
+        "quantity": "1 pound"
+      },
+      {
+        "name": "bacon",
+        "quantity": "8 ounces"
+      },
+      {
+        "name": "garlic",
+        "quantity": "2 cloves"
+      },
+      {
+        "name": "eggs",
+        "quantity": "2"
+      },
+      {
+        "name": "Parmesan cheese",
+        "quantity": "1/2 cup"
+      }
+    ],
+    "instructions": "1. Cook spaghetti according to package instructions. Fry bacon in a pan until crispy. 2. In a separate bowl, whisk eggs and Parmesan cheese together. 3. Drain the spaghetti and add it to the pan with the bacon. Turn off the heat. 4. Add the egg and cheese mixture to the spaghetti and bacon, stirring until the spaghetti is coated in the mixture. 5. Serve hot.",
+    "rating": 4,
+    "time": 30,
+    "calories": 500,
+    "createdBy": "Why The Lucky Stiff"
+  },
+  {
+    "name": "Chicken Fajitas",
+    "ingredients": [
+      {
+        "name": "chicken breasts",
+        "quantity": "1 pound"
+      },
+      {
+        "name": "onion",
+        "quantity": "1"
+      },
+      {
+        "name": "bell pepper",
+        "quantity": "1"
+      },
+      {
+        "name": "tortillas",
+        "quantity": "8"
+      },
+      {
+        "name": "salsa",
+        "quantity": "1 cup"
+      }
+    ],
+    "instructions": "1. Cut the chicken breasts into strips. Slice the onion and bell pepper. 2. In a pan, heat up some oil over medium-high heat. Add the chicken strips and cook until browned. 3. Add the sliced onion and bell pepper to the pan and continue cooking until vegetables are soft. 4. Warm up the tortillas in a separate pan or in the microwave. 5. Serve the chicken fajitas on the warm tortillas with salsa on the side.",
+    "rating": 2,
+    "time": 45,
+    "calories": 400,
+    "createdBy": "C.A.R. Hoare"
+  }
 ]

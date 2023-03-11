@@ -28,7 +28,13 @@ const recipeSchema = new Schema({
     calories: {
         type: Number,
     },
+    createdBy: {
+        type: String,
+        required: true,
+    } 
 })
 
 
-module.exports = model('Recipe', recipeSchema);
+const Recipe = model('Recipe', recipeSchema);
+
+module.exports = Recipe;

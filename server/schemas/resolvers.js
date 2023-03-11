@@ -12,7 +12,7 @@ const resolvers = {
     }, 
     recipe: async (parent, { username }) => {
       const params = username ? { username } : {};
-      return Recipe.find(params).sort({ createdBy: -1 })
+      return Recipe.find();
     },
     recipe: async (parent, { recipeId }) => {
       return Recipe.findOne({ _id: recipeId });

@@ -17,7 +17,6 @@ const typeDefs = gql`
     rating: String
     time: String
     calories: String
-    createdAt: String
     createdBy: User
   }
 

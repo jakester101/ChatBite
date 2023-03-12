@@ -29,7 +29,24 @@ const resolvers = {
       const user = await User.create({ username, email, password });
       return { user };
     },
-  }
+    addRecipe: async (parent, { recipeId, instructions }) => {
+      return Recipe.findOneAndUpdate(
+        { _id: recipeId },
+        {$addToSet: { instructions: instructions } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeRecipe: async (parent, { recipeId, instructions }) => {
+      return Recipe.findOneAndDelete(
+        { _id: recipeId },
+        { $pull: { instructions: instructions } },
+        { new: true }
+      );
+    },
+  },
 }
 
 module.exports = resolvers;

@@ -10,7 +10,7 @@ const resolvers = {
     user: async (parent, { username }) => {
       return User.findOne({ username }).populate('recipes');
     }, 
-    recipe: async (parent, { username }) => {
+    recipes: async (parent, { username }) => {
       const params = username ? { username } : {};
       return Recipe.find(params).sort({ createdBy: -1 })
     },
@@ -23,7 +23,30 @@ const resolvers = {
     //   }
     //   throw new AuthenticationError('Log in before your attempt')
     // }
-  }
+  },
+  Mutation: {
+    addUser: async (parent, { username, email, password }) => {
+      const user = await User.create({ username, email, password });
+      return { user };
+    },
+    addRecipe: async (parent, { recipeId, instructions }) => {
+      return Recipe.findOneAndUpdate(
+        { _id: recipeId },
+        {$addToSet: { instructions: instructions } },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+    },
+    removeRecipe: async (parent, { recipeId, instructions }) => {
+      return Recipe.findOneAndDelete(
+        { _id: recipeId },
+        { $pull: { instructions: instructions } },
+        { new: true }
+      );
+    },
+  },
 }
 
 module.exports = resolvers;

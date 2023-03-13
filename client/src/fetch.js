@@ -24,9 +24,16 @@ fetch('/api/generate/text', {
     return response.json();
   })
   .then(data => {
-    const recipe = JSON.parse(data.choices[0].message.content);
+    let recipe;
+    try{
+     recipe = JSON.parse(data.choices[0].message.content);
+    } 
+    catch (error) {
+        console.log(data.choices[0].message.content); // if the prompt was denied,print the message
+        throw new Error('Prompt denied');             // and throw an error
+    }
+
     console.log(recipe); // Do something with the recipe data
-  
     // Fetch the image data for the recipe
     return fetch('/api/generate/image', {
       method: 'POST',

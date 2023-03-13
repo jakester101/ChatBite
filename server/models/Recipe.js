@@ -28,6 +28,11 @@ const recipeSchema = new Schema({
     calories: {
         type: Number,
     },
+    image: {
+        url: {
+            type: String, required: true
+        }
+    },
     createdBy: {
         type: String,
         required: true,

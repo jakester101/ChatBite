@@ -31,7 +31,7 @@ function fetchData(){
       recipe = JSON.parse(data.choices[0].message.content);
       } 
       catch (error) {
-          console.log(data.choices[0].message.content); // if the prompt was denied,print the message
+          promptDenied(data.choices[0].message.content); // if the prompt was denied, call the promptDenied function
           throw new Error('Prompt denied');             // and throw an error
       }
 
@@ -62,6 +62,19 @@ function fetchData(){
     .catch(error => console.error(error));
     
   }
+
+
+
+
+
+
+function promptDenied(e){
+  // This function will be called if the prompt is denied by the OpenAI API
+  // It will display a message to the user and allow them to try again
+  console.log(e);
+
+
+}
 
 
   /*------------------------------------------RESPONSE--------------------------------------------------*/

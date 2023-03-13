@@ -8,7 +8,7 @@ const prompt = "Make a recipe out of beef, beans, rice, lettuce, tomato. Respond
 
 
 // This is the first endpoint that will be called. It will generate a recipe based on the prompt
-fetch('http://localhost:3001/api/generate/text', {
+fetch('/api/generate/text', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ fetch('http://localhost:3001/api/generate/text', {
     console.log(recipe); // Do something with the recipe data
   
     // Fetch the image data for the recipe
-    return fetch('http://localhost:3001/api/generate/image', {
+    return fetch('/api/generate/image', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

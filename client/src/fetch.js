@@ -1,8 +1,8 @@
 
 
-function fetchData(){
+function fetchData(params){
 
-  const prompt = "Make a recipe out of beef, beans, rice, lettuce, tomato. Respond with the JSON object only.";
+  const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
   // This prompt will be generate based on the user's input, but logic will need to wait until
   // front end is developed. For now, we'll just use a hardcoded prompt.

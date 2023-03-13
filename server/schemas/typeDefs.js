@@ -17,7 +17,6 @@ const typeDefs = gql`
     rating: String
     time: String
     calories: String
-    image: Image!
     createdAt: String
     createdBy: User
   }
@@ -26,10 +25,6 @@ const typeDefs = gql`
     _id: ID
     name: String!
     quantity: String
-  }
-
-  type Image {
-    url: String!
   }
 
   type Auth {

@@ -22,7 +22,7 @@
     "url": "https://github.com/jakester101/ChatBite/issues"
   },
   "homepage": "https://github.com/jakester101/ChatBite#readme",
-  "dependencies": {
-    "concurrently": "^7.6.0"
+  "devDependencies": {
+    "concurrently": "^5.1.0"
   }
 }

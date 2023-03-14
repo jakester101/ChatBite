@@ -1,6 +1,9 @@
 
 
-function fetchData(params){
+export function fetchData(params){
+  // display the spinner
+  const spinner = document.querySelector('.spinner');
+  spinner.style.display = 'block';
 
   const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
@@ -21,6 +24,7 @@ function fetchData(params){
     })
     .then(response => {
       if (!response.ok) {
+        spinner.style.display = 'none';
         throw new Error('Network response was not ok');
       }
       return response.json();
@@ -31,6 +35,7 @@ function fetchData(params){
       recipe = JSON.parse(data.choices[0].message.content);
       } 
       catch (error) {
+          spinner.style.display = 'none';
           promptDenied(data.choices[0].message.content); // if the prompt was denied, call the promptDenied function
           throw new Error('Prompt denied');             // and throw an error
       }
@@ -51,16 +56,17 @@ function fetchData(params){
     })
     .then(response => {
       if (!response.ok) {
+        spinner.style.display = 'none';
         throw new Error('Network response was not ok');
       }
       return response.json();
     })
     .then(imageData => {
       // save the image data to local storage
-      localStorage.setItem('imageData', JSON.stringify(imageData)); 
+      localStorage.setItem('imageData', JSON.stringify(imageData));
+      spinner.style.display = 'none'; 
     })
     .catch(error => console.error(error));
-    
   }
 
 
@@ -68,7 +74,7 @@ function fetchData(params){
 
 
 
-function promptDenied(e){
+export function promptDenied(e){
   // This function will be called if the prompt is denied by the OpenAI API
   // It will display a message to the user and allow them to try again
   console.log(e);

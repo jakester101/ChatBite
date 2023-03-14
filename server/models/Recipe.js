@@ -30,9 +30,8 @@ const recipeSchema = new Schema({
         type: Number,
     },
     image: {
-        url: {
-            type: String, required: false
-        }
+        type: String, 
+        required: false,
     },
     createdAt: {
         type: Date,
@@ -42,7 +41,11 @@ const recipeSchema = new Schema({
     createdBy: {
         type: String,
         required: true,
-    } 
+    },
+    isPublic: {
+        type: Boolean,
+        default: false,
+    }, 
 })
 
 

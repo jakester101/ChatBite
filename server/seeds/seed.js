@@ -14,12 +14,12 @@ db.once('open', async () => {
         await User.create(usersData);
 
         for (let i = 0; i < recipesData.length; i++) {
-            const { _id, createdBy } = await Recipe.create(recipesData[i]);
+            const { _id, searcher } = await Recipe.create(recipesData[i]);
             const user = await User.findOneAndUpdate(
-                { username: createdBy },
+                { username: searcher },
                 {
                     $addToSet: {
-                        recipes: _id,
+                        ingredients: _id,
                     },
                 }
             );

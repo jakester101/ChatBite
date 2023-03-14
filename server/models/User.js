@@ -17,7 +17,7 @@ const userSchema = new Schema({
         unique: true,
         match: [/.+@.+\..+/, 'Must match an email address!'],
     },
-    recipes: [
+    ingredients: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Recipe',
@@ -28,3 +28,4 @@ const userSchema = new Schema({
 const User = model('User', userSchema)
 
 module.exports = User;
+

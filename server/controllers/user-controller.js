@@ -2,6 +2,17 @@ const {User} = require('../models/User');
 
 
 module.exports = {
+    async SignUp(req, res) {
+        try{
+            const {email, password } = req.body;
+            const user = await User.create({email,password});
+
+            res.status(200).json({message: "User created ", user})
+        }catch(error){
+            console.error(error);
+            res.status(500).json({message: "server error"})
+        }
+    },
     async getAllUsers(req, res){
         const User = await User.find({});
         if(!user){

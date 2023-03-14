@@ -3,7 +3,8 @@ const {
     getAllUsers,
     getSingleUser,
     createUser,
-    updateUser
+    updateUser,
+    SignUp
 } = require('../../controllers/user-controller');
 
 router.route('/')
@@ -13,5 +14,7 @@ router.route('/')
 router.route('/:id')
     .get(getSingleUser)
     .put(updateUser);
+
+router.route('/signup').post(SignUp)
 
 module.exports = router;

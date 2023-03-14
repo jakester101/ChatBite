@@ -15,21 +15,17 @@ const typeDefs = gql`
     ingredients: [Ingredient]!
     instructions: String
     rating: String
-    time: String
+    prepTime: String
     calories: String
-    image: Image!
+    image: String
     createdAt: String
-    createdBy: User
+    createdBy: String
   }
 
   type Ingredient {
     _id: ID
     name: String!
     quantity: String
-  }
-
-  type Image {
-    url: String!
   }
 
   type Auth {
@@ -47,7 +43,7 @@ const typeDefs = gql`
 
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addRecipe(recipeId: ID! instructions: String!): Recipe
+    addRecipe(name: String! ingredients: [String]! instructions: String! calories: Int! prepTime: Int! image: String!): Recipe
     removeRecipe(recipeId: ID!): Recipe
   }
 `;

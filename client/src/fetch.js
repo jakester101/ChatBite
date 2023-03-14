@@ -2,8 +2,7 @@
 
 export function fetchData(params){
   // display the spinner
-  const spinner = document.querySelector('.spinner');
-  spinner.style.display = 'block';
+
 
   const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
@@ -24,7 +23,7 @@ export function fetchData(params){
     })
     .then(response => {
       if (!response.ok) {
-        spinner.style.display = 'none';
+
         throw new Error('Network response was not ok');
       }
       return response.json();
@@ -35,7 +34,7 @@ export function fetchData(params){
       recipe = JSON.parse(data.choices[0].message.content);
       } 
       catch (error) {
-          spinner.style.display = 'none';
+
           promptDenied(data.choices[0].message.content); // if the prompt was denied, call the promptDenied function
           throw new Error('Prompt denied');             // and throw an error
       }
@@ -56,7 +55,7 @@ export function fetchData(params){
     })
     .then(response => {
       if (!response.ok) {
-        spinner.style.display = 'none';
+
         throw new Error('Network response was not ok');
       }
       return response.json();
@@ -64,9 +63,12 @@ export function fetchData(params){
     .then(imageData => {
       // save the image data to local storage
       localStorage.setItem('imageData', JSON.stringify(imageData));
-      spinner.style.display = 'none'; 
+
     })
-    .catch(error => console.error(error));
+    .catch(error => {
+      console.error(error);
+
+    });
   }
 
 

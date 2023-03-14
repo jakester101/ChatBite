@@ -1,8 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
 const router = require('express').Router();
+const dotenv = require("dotenv");
+dotenv.config();
+API_KEY = process.env.API_KEY;
 
 
 const app = express();
@@ -22,7 +24,7 @@ router.post('/text', (req, res) => {
   }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer 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`
+      'Authorization': API_KEY,
     }
   })
   .then(response => {
@@ -40,7 +42,7 @@ router.post('/image', (req, res) => {
   }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer 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`
+      'Authorization': API_KEY,
     }
   })
   .then(response => res.json(response.data))

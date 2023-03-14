@@ -5,6 +5,9 @@ const {typeDefs, resolvers} = require('./schemas');
 const db = require('./config/connection');
 const cors = require('cors');
 const routes = require("./routes");
+const dotenv = require("dotenv");
+dotenv.config();
+global.API_KEY = process.env.API_KEY;
 
 
 const PORT = process.env.PORT || 3001;

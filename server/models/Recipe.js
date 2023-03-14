@@ -31,7 +31,11 @@ const recipeSchema = new Schema({
     createdBy: {
         type: String,
         required: true,
-    } 
+    },
+    isPublic: {
+        type: Boolean,
+        default: false,
+    }, 
 })
 
 

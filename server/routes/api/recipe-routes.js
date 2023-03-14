@@ -1,17 +1,17 @@
 const router = require('express').Router();
 const {
     getAllRecipes,
-    getSingleRecipes,
+    getSingleRecipe,
     createRecipe,
     updateRecipe
-} = require('../../controllers/user-controller');
+} = require('../../controllers/recipe-controller');
 
 router.route('/')
     .get(getAllRecipes)
     .post(createRecipe);
 
 router.route('/:id')
-    .get(getSingleRecipes)
+    .get(getSingleRecipe)
     .put(updateRecipe);
 
 module.exports = router;

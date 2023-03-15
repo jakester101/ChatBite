@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import { fetchData } from "../fetch";
+import { saveRecipe } from "../saveRecipe";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
 
@@ -67,9 +68,9 @@ const DashBoard = () => {
                             Make New Recipe
                         </button>
                     </div>
-                    {recipe && image && (
-                    <RecipeCard recipe={recipe} image={image} />
-                    )}
+                    <div className="flex justify-center items-center h-full">
+                        <RecipeCard recipe={recipe} image={image} onSave = {saveRecipe}/>
+                    </div>
              </div>
              {showSpinner && (
              <div className="spinner absolute bottom-1/3 right-1/3 -mt-4 -ml-4 border-t-4 border-b-4 border-purple-700 h-8 w-8 rounded-full animate-spin"></div>

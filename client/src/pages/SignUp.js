@@ -10,7 +10,7 @@ import React, {useState} from "react";
       
         const handleSubmit = async (event) => {
           event.preventDefault();
-          const response = await fetch("http://localhost:3001/api/user/signup", {
+          const response = await fetch(`${window.location.origin}/api/user/signup`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password, username }),

@@ -2,7 +2,7 @@ export async function fetchData(params) {
   const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
   try {
-    const response = await fetch('http://localhost:3001/api/generate/text', {
+    const response = await fetch(`${window.location.origin}/api/generate/text`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ export async function fetchData(params) {
     recipe.ingredients = params;
     localStorage.setItem('recipeData', JSON.stringify(recipe));
 
-    const imageResponse = await fetch('http://localhost:3001/api/generate/image', {
+    const imageResponse = await fetch(`${window.location.origin}/api/generate/image`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +56,7 @@ export async function fetchData(params) {
   }
 }
 
-  function promptDenied(e) {
+ function promptDenied(e) {
   console.log(e);
 }
 
@@ -111,3 +111,24 @@ imageData returns as object with a url linking to the image:
 /------------------------------------------------------------------------------------------------------*/
 
 
+export async function recipeList(){
+      try {
+    const response = await fetch(`${window.location.origin}/api/recipe/public`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}

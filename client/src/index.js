@@ -6,6 +6,7 @@ import Layout from "./pages/AppLayout";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/UserLogin";
 import DashBoard from "./pages/DashBoard";
+import Banner from "./pages/Banner";
 
 const client = new ApolloClient({
   uri: `https://evening-fjord-31018.herokuapp.com/graphql`, // http://localhost:3001/graphql
@@ -21,6 +22,7 @@ export default function App() {
             <Route index element={<Login />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/banner" element={<Banner />} />
           </Route>
         </Routes>
       </BrowserRouter>

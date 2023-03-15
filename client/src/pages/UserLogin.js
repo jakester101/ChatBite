@@ -1,5 +1,5 @@
 import { Link, } from "react-router-dom";
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 
 
 
@@ -12,7 +12,7 @@ const Login = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        const response = await fetch('http://localhost:3001/api/user/login', {
+        const response = await fetch(`${window.location.origin}/api/user/login`,{
             method: "POST",
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({email, password}),

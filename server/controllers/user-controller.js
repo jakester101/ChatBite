@@ -36,10 +36,9 @@ module.exports = {
         }
       },
       async logout(req, res) {
-        const {userId} = req.body;
-
+        const {_id} = req.body;
         try{
-            const user = await User.findById(userId);
+            const user = await User.findById(_id);
 
             if(!user) {
                 return res.status(404).json({message: "user not found"})

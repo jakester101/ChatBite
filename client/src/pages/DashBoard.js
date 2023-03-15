@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import { fetchData } from "../fetch";
+
+import React, { useState, useEffect} from "react";
+import { fetchData, recipeList} from "../fetch";
 import { saveRecipe } from "../saveRecipe";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
+
 
 
 const DashBoard = () => {
@@ -10,6 +12,21 @@ const DashBoard = () => {
     const [recipe, setRecipe] = useState(null);
     const [image, setImage] = useState(null);
     const [showSpinner, setShowSpinner] = useState(false);
+
+    const [rList, setRList] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await recipeList();
+        setRList(data);
+      };
+  
+      fetchData();
+    }, []);
+
+  
+    console.log(rList);
+    let list = rList.map((recipe) => (<button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"key={recipe._id} onClick = {console.log(`${recipe.name} selected`)}>{recipe.name}</button>));
 
     const handleFetchData = async (params) => {
       setShowSpinner(true);
@@ -24,6 +41,7 @@ const DashBoard = () => {
       }
     };
     
+
 
     return (
       <div className="w-full flex justify-center h-screen">
@@ -58,6 +76,24 @@ const DashBoard = () => {
                     type="text"
                     className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     placeholder="Search"
+                    />
+                    <div className="mt-6 ">
+                        <button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                            Search
+                        </button>
+                    </div>
+                    <br></br>
+                    <ul>
+                        {list}
+                    </ul>
+             </div>
+             <div className="w-3/4 p-8 h-screen text-3xl">
+             <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2>
+             <input
+                type="text"
+                className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                placeholder="Search"
+                
                     value={params}
                     onChange={(e) => setParams(e.target.value)}
                 />

@@ -55,7 +55,7 @@ export async function fetchData(params) {
   }
 }
 
-export function promptDenied(e) {
+ function promptDenied(e) {
   console.log(e);
 }
 
@@ -110,3 +110,24 @@ imageData returns as object with a url linking to the image:
 /------------------------------------------------------------------------------------------------------*/
 
 
+export async function recipeList(){
+      try {
+    const response = await fetch('http://localhost:3001/api/recipe/public', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}

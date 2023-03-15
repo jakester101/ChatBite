@@ -112,7 +112,7 @@ imageData returns as object with a url linking to the image:
 
 export async function recipeList(){
       try {
-    const response = await fetch('http://localhost:3001/api/recipe/public', {
+    const response = await fetch(`${window.location.origin}/api/recipe/public`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

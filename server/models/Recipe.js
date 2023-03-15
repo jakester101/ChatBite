@@ -6,15 +6,11 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
     },
-    ingredients: [{
+    ingredients: {
         name: {
             type: String, required: true
-        },
-        quantity: {
-            type: String,
-            required: true,
         }
-    }],
+    },
     instructions: {
         type: String,
         required: true,
@@ -40,7 +36,7 @@ const recipeSchema = new Schema({
     },
     createdBy: {
         type: String,
-        required: true,
+        required: false,
     },
     isPublic: {
         type: Boolean,

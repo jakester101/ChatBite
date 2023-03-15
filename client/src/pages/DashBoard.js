@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { fetchData } from "../fetch";
 
-import React, { useState, useEffect} from "react";
-import { fetchData, recipeList} from "../fetch";
-import { saveRecipe } from "../saveRecipe";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
-
+import { useMutation } from '@apollo/client';
+import { ADD_RECIPE } from '../utils/mutations';
 
 const DashBoard = () => {
+    
     const [params, setParams] = useState("");
     const [recipe, setRecipe] = useState(null);
     const [image, setImage] = useState(null);
     const [showSpinner, setShowSpinner] = useState(false);
+    const [addRecipe] = useMutation(ADD_RECIPE);
 
     const [rList, setRList] = useState([]);
 
@@ -40,9 +42,33 @@ const DashBoard = () => {
         setShowSpinner(false);
       }
     };
+
+    const saveRecipe = async () => {
+      const recipeData = JSON.parse(localStorage.getItem("recipeData"));
+      const imageData = JSON.parse(localStorage.getItem("imageData"));
     
-
-
+      if (recipeData && imageData) {
+        const input = {
+          name: recipeData.name,
+          ingredients: recipeData.ingredients,
+          instructions: recipeData.instructions,
+          calories: recipeData.calorieCount,
+          prepTime: recipeData.prepTime,
+          image: imageData.data[0].url
+        };
+    
+        try {
+          // Call the addRecipe mutation
+          const { data } = await addRecipe({ variables: input });
+          console.log("Recipe added:", data);
+        } catch (error) {
+          console.error("Error adding recipe:", error);
+        }
+      } else {
+        console.log("No data to save");
+      }
+    };
+    
     return (
       <div className="w-full flex justify-center h-screen">
         <div className="w-1/4 p-8 border-solid border-r-4 h-screen">

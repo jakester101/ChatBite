@@ -1,6 +1,7 @@
 const User = require('../models/User')
 
 module.exports = {
+    //creating a user logic 
     async signup(req, res) {
         try {
           const { email, password, username } = req.body;
@@ -14,6 +15,46 @@ module.exports = {
           res.status(500).json({ message: 'Internal server error' });
         }
       },
+    //login logic 
+      async login(req, res) {
+        const {email,password} = req.body;
+
+        try {
+            const user = await User.findOne({email, password});
+
+            if(!user) {
+                return res.status(401).json({message: "Invalid credentials"})
+            }
+
+            user.loggedIn = true;
+            await user.save();
+
+            return res.status(200).json({message:"Login Successful"})
+        } catch (error){
+            console.error(error);
+            return res.status(500).json({message: 'server error'})
+        }
+      },
+      async logout(req, res) {
+        const {userId} = req.body;
+
+        try{
+            const user = await User.findById(userId);
+
+            if(!user) {
+                return res.status(404).json({message: "user not found"})
+            }
+
+            user.loggedIn = false;
+            await user.save();
+            
+            return res.status(200).json({message: "logout succesful"});
+        }catch(error){
+            console.error(error);
+            return res.status(500).json({message:"server error"})
+        }
+      },
+
   async getAllUsers(req, res) {
     const users = await User.find({});
     if (!users) {

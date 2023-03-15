@@ -4,7 +4,9 @@ const {
     getSingleUser,
     createUser,
     updateUser,
-    signup
+    signup,
+    login,
+    logout
 } = require('../../controllers/user-controller');
 
 router.route('/')
@@ -16,5 +18,9 @@ router.route('/:id')
     .put(updateUser);
 
 router.route('/signup').post(signup)
+
+router.route('/login').post(login)
+
+router.route('/logout').post(logout)
 
 module.exports = router;

@@ -17,6 +17,10 @@ const userSchema = new Schema({
         unique: true,
         match: [/.+@.+\..+/, 'Must match an email address!'],
     },
+    loggedIn: {
+        type: Boolean,
+        default: false,
+    },
     recipes: [
         {
             type: Schema.Types.ObjectId,

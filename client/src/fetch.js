@@ -28,7 +28,8 @@ export async function fetchData(params) {
       console.log('No JSON object found');
       throw new Error('Prompt denied');
     }
-
+    
+    recipe.ingredients = params;
     localStorage.setItem('recipeData', JSON.stringify(recipe));
 
     const imageResponse = await fetch('http://localhost:3001/api/generate/image', {
@@ -55,7 +56,7 @@ export async function fetchData(params) {
   }
 }
 
-export function promptDenied(e) {
+  function promptDenied(e) {
   console.log(e);
 }
 

@@ -1,22 +1,30 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import Layout from "./pages/AppLayout";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/UserLogin";
 import DashBoard from "./pages/DashBoard";
 
+const client = new ApolloClient({
+  uri: `https://evening-fjord-31018.herokuapp.com/graphql`, // http://localhost:3001/graphql
+  cache: new InMemoryCache(),
+});
+
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-        <Route index element={<Login />} />
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/dashboard" element={<DashBoard />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Login />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/dashboard" element={<DashBoard />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ApolloProvider>
   );
 }
 

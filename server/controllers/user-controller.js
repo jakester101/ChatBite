@@ -1,6 +1,19 @@
-const { User } = require('../models/User');
+const User = require('../models/User')
 
 module.exports = {
+    async signup(req, res) {
+        try {
+          const { email, password, username } = req.body;
+          console.log(User)
+          const user = new User ({ email, password, username });
+          await user.save()
+    
+          res.status(201).json({ message: 'User created successfully', user });
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: 'Internal server error' });
+        }
+      },
   async getAllUsers(req, res) {
     const users = await User.find({});
     if (!users) {
@@ -17,12 +30,18 @@ module.exports = {
     res.status(200).json(user);
   },
 
-  async createUser({ body }, res) {
-    const newUser = await User.create(body);
-    if (!newUser) {
-      return res.status(400).json({ message: "Unable to create user" });
-    }
-    res.status(200).json(newUser);
+  async createUser(req, res) {
+    const {email, password} =req.body;
+    const newUser = new User ({email, password});
+
+    newUser 
+        .save()
+        .then(user => {
+            res.status(201).json(user);
+        })
+        .catch(err => {
+            res.status(500).json({error:err.message})
+        })
   },
 
   async updateUser(req, res) {

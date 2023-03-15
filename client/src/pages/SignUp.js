@@ -39,7 +39,7 @@ import React, {useState} from "react";
                 <form className="mt-6" onSubmit={handleSubmit}>
                     <div className="mb-2">
                         <label
-                            for="email"
+                            htmlFor="email"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Email
@@ -55,7 +55,7 @@ import React, {useState} from "react";
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            htmlFor="password"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Password
@@ -71,7 +71,7 @@ import React, {useState} from "react";
                     </div>
                     <div className="mb-2">
                         <label
-                            for="password"
+                            htmlFor="password"
                             className="block text-sm font-semibold text-gray-800"
                         >
                             Re-Password

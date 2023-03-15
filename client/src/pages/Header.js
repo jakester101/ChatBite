@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
+import React from "react";
+
+
 
 const Header = () => {
+   
     return (
         <div>
             <header className="w-full shadow-xl p-4 mb-2 bg-purple-800">

@@ -15,7 +15,8 @@ router.route('/')
 
 router.route('/:id')
     .get(getSingleUser)
-    .put(updateUser);
+    .put(updateUser)
+    
 
 router.route('/signup').post(signup)
 

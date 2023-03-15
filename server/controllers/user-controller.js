@@ -35,7 +35,6 @@ module.exports = {
             return res.status(500).json({message: 'server error'})
         }
       },
-    //logout logic 
       async logout(req, res) {
         const {_id} = req.body;
         try{

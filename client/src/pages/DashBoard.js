@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { fetchData } from "../fetch";
-
+import { recipeList } from "../fetch";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
 import { useMutation } from '@apollo/client';

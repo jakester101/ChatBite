@@ -26,8 +26,10 @@ const DashBoard = () => {
                     place holder text
                 </div>
              </div>
-             <div className="w-3/4 p-8 h-screen text-3xl">
-             <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2>
+             
+             <div className="w-3/4 p-8 h-screen text-2xl">
+             <h2>Hungry but dont know what to make? </h2>
+           Type in what ingredients you have and we will make a recipe for you!<br />Pleas type them in one at once sepperated by a space and a comma. <br />Then click the "Make New Recipe".
             <input 
                 type="text"
                 className="block w-half px-4 text-2xl shadow-xl py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"

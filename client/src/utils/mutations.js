@@ -39,4 +39,16 @@ export const REMOVE_RECIPE = gql`
       _id
     }
   }
+`;
+
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      _id
+      user {
+        _id
+        username
+      }
+    }
+  }
 `

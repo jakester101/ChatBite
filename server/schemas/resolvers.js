@@ -60,6 +60,20 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to log in')
     },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if(!user) {
+        throw new AuthenticationError('You enter either wrong email or password');
+      }
+      const correctPw = await user.isCorrectPassword(password);
+
+      if(!correctPw) {
+        throw new AuthenticationError('You enter either wrong email or password');
+      }
+
+      return { user };
+    }
   },
 }
 

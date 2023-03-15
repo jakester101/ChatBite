@@ -2,7 +2,7 @@ export async function fetchData(params) {
   const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
   try {
-    const response = await fetch('http://localhost:3001/api/generate/text', {
+    const response = await fetch(`${window.location.origin}/api/generate/text`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export async function fetchData(params) {
 
     localStorage.setItem('recipeData', JSON.stringify(recipe));
 
-    const imageResponse = await fetch('http://localhost:3001/api/generate/image', {
+    const imageResponse = await fetch(`${window.location.origin}/api/generate/image`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

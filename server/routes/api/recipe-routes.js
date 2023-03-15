@@ -3,15 +3,19 @@ const {
     getAllRecipes,
     getSingleRecipe,
     createRecipe,
-    updateRecipe
+    updateRecipe,
+    getAllPublicRecipes
 } = require('../../controllers/recipe-controller');
 
 router.route('/')
     .get(getAllRecipes)
     .post(createRecipe);
 
-router.route('/:id')
+router.route('/query/:id')
     .get(getSingleRecipe)
     .put(updateRecipe);
 
-module.exports = router;
+router.route('/public')
+    .get(getAllPublicRecipes);
+
+module.exports = router;    

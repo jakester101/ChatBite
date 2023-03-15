@@ -1,10 +1,22 @@
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
-import { fetchData, promptDenied } from "../fetch";
+import React, { useState, useEffect} from "react";
+import { fetchData, recipeList} from "../fetch";
+
 
 const DashBoard = () => {
     const [params, setParams] = useState("");
     const [showSpinner, setShowSpinner] = useState(false);
+    const [rList, setRList] = useState([]);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const data = await recipeList();
+        setRList(data);
+      };
+  
+      fetchData();
+    }, []);
+
     const handleFetchData = async (params) => {
         setShowSpinner(true);
         try {
@@ -14,7 +26,9 @@ const DashBoard = () => {
         } finally {
           setShowSpinner(false);
         }
-      };
+    };
+    console.log(rList);
+    let list = rList.map((recipe) => (<button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"key={recipe._id} onClick = {console.log(`${recipe.name} selected`)}>{recipe.name}</button>));
 
     return (
 
@@ -32,15 +46,9 @@ const DashBoard = () => {
                         </button>
                     </div>
                     <br></br>
-                <div>
-                    place holder text
-                </div>
-                <div>
-                    place holder text
-                </div>
-                <div>
-                    place holder text
-                </div>
+                    <ul>
+                        {list}
+                    </ul>
              </div>
              <div className="w-3/4 p-8 h-screen text-3xl">
              <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2>
@@ -68,5 +76,4 @@ const DashBoard = () => {
         
       )
   };
-
 export default DashBoard;

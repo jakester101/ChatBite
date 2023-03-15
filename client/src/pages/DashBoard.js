@@ -1,23 +1,31 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { fetchData, promptDenied } from "../fetch";
+import { fetchData } from "../fetch";
+import { saveRecipe } from "../saveRecipe";
+import RecipeCard from './RecipeCard'; // Import RecipeCard component
+
 
 const DashBoard = () => {
     const [params, setParams] = useState("");
+    const [recipe, setRecipe] = useState(null);
+    const [image, setImage] = useState(null);
     const [showSpinner, setShowSpinner] = useState(false);
+
     const handleFetchData = async (params) => {
-        setShowSpinner(true);
-        try {
-          await fetchData(params);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setShowSpinner(false);
-        }
-      };
+      setShowSpinner(true);
+      try {
+        const { recipeData, imageData } = await fetchData(params);
+        setRecipe(recipeData);
+        setImage(imageData);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setShowSpinner(false);
+      }
+    };
+    
 
     return (
-
         <div className="w-full flex justify-center h-screen">
             <div className="w-1/4 p-8 border-solid border-r-4 h-screen" >
                 Previous Recipes
@@ -60,11 +68,16 @@ const DashBoard = () => {
                             Make New Recipe
                         </button>
                     </div>
+                    <div className="flex justify-center items-center h-full">
+                        <RecipeCard recipe={recipe} image={image} onSave = {saveRecipe}/>
+                    </div>
              </div>
              {showSpinner && (
              <div className="spinner absolute bottom-1/3 right-1/3 -mt-4 -ml-4 border-t-4 border-b-4 border-purple-700 h-8 w-8 rounded-full animate-spin"></div>
              )}
+               
         </div>
+        
         
       )
   };

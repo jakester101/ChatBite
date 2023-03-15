@@ -1,80 +1,71 @@
-
-
-function fetchData(params){
-
+export async function fetchData(params) {
   const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
-  // This prompt will be generate based on the user's input, but logic will need to wait until
-  // front end is developed. For now, we'll just use a hardcoded prompt.
-  // Prompt is passed to endpoint as req.body.prompt
-
-
-  // This is the first endpoint that will be called. It will generate a recipe based on the prompt
-  fetch('/api/generate/text', {
+  try {
+    const response = await fetch('http://localhost:3001/api/generate/text', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        prompt: prompt
-      })
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      let recipe;
-      try{
-      recipe = JSON.parse(data.choices[0].message.content);
-      } 
-      catch (error) {
-          promptDenied(data.choices[0].message.content); // if the prompt was denied, call the promptDenied function
-          throw new Error('Prompt denied');             // and throw an error
-      }
+        prompt: prompt,
+      }),
+    });
 
-      // save the recipe to local storage
-      localStorage.setItem('recipeData', JSON.stringify(recipe));
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
 
-      // Fetch the image data for the recipe
-      return fetch('/api/generate/image', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          prompt: recipe.name
-        })
-      });
-    })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(imageData => {
-      // save the image data to local storage
-      localStorage.setItem('imageData', JSON.stringify(imageData)); 
-    })
-    .catch(error => console.error(error));
-    
+    const data = await response.json();
+    let recipe;
+    const jsonString = data.choices[0].message.content.match(/({[\s\S]*})/);
+
+    if (jsonString) {
+      recipe = JSON.parse(jsonString[0]);
+      console.log(recipe);
+    } else {
+      promptDenied(data.choices[0].message.content);
+      console.log('No JSON object found');
+      throw new Error('Prompt denied');
+    }
+
+    localStorage.setItem('recipeData', JSON.stringify(recipe));
+
+    const imageResponse = await fetch('http://localhost:3001/api/generate/image', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: recipe.name,
+      }),
+    });
+
+    if (!imageResponse.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const imageData = await imageResponse.json();
+    console.log(imageData);
+    localStorage.setItem('imageData', JSON.stringify(imageData));
+
+    return { recipeData: recipe, imageData: imageData };
+  } catch (error) {
+    console.error(error);
   }
-
-
-
-
-
-
-function promptDenied(e){
-  // This function will be called if the prompt is denied by the OpenAI API
-  // It will display a message to the user and allow them to try again
-  console.log(e);
-
-
 }
+
+export function promptDenied(e) {
+  console.log(e);
+}
+
+
+
+
+
+
+
+
 
 
   /*------------------------------------------RESPONSE--------------------------------------------------*/

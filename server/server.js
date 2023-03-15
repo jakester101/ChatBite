@@ -3,6 +3,13 @@ const {ApolloServer, gql} = require('apollo-server-express');
 const path = require('path');
 const {typeDefs, resolvers} = require('./schemas');
 const db = require('./config/connection');
+const cors = require('cors');
+const routes = require("./routes");
+const dotenv = require("dotenv");
+dotenv.config();
+global.API_KEY = process.env.API_KEY;
+
+
 
 const PORT = process.env.PORT || 3001;
 const app = express();
@@ -13,10 +20,16 @@ const server = new ApolloServer({
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cors());
+app.use(routes);
+
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static(path.join(__dirname, '../client/build')));
   }
+  
+
+  
   app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });

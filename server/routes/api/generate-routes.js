@@ -1,14 +1,18 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const axios = require('axios');
+const router = require('express').Router();
+const dotenv = require("dotenv");
+dotenv.config();
+API_KEY = process.env.API_KEY;
+
 
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cors());
 
 //route for generating recipe
-app.post('/text', (req, res) => {
+router.post('/text', (req, res) => {
   const prompt = req.body.prompt;
 
   axios.post('https://api.openai.com/v1/chat/completions', {
@@ -20,7 +24,7 @@ app.post('/text', (req, res) => {
   }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+      'Authorization': API_KEY,
     }
   })
   .then(response => {
@@ -31,16 +35,18 @@ app.post('/text', (req, res) => {
 
 
 //route for generating image
-app.post('/image', (req, res) => {
+router.post('/image', (req, res) => {
   axios.post('https://api.openai.com/v1/images/generations', {
     prompt: req.body.prompt,
     n : 1,
   }, {
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
+      'Authorization': API_KEY,
     }
   })
   .then(response => res.json(response.data))
   .catch(error => console.log(error));
 });
+
+module.exports = router;

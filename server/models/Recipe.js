@@ -1,4 +1,5 @@
 const {Schema, model} = require('mongoose');
+const dateFormat = require('../utils/dateFormat');
 
 const recipeSchema = new Schema({
     name: { 
@@ -18,7 +19,7 @@ const recipeSchema = new Schema({
         type: String,
         required: true,
     },
-    time: {
+    prepTime: {
         type: Number,
         required: true,
     },
@@ -28,10 +29,23 @@ const recipeSchema = new Schema({
     calories: {
         type: Number,
     },
+    image: {
+        type: String, 
+        required: false,
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        get: (timestamp) => dateFormat(timestamp),
+    },
     createdBy: {
         type: String,
         required: true,
-    } 
+    },
+    isPublic: {
+        type: Boolean,
+        default: false,
+    }, 
 })
 
 

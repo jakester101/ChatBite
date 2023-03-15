@@ -1,60 +1,58 @@
-
-export function fetchData(params) {
+export async function fetchData(params) {
   const prompt = `Make a recipe out of ${params}. Respond with the JSON object only.`;
 
-  fetch('http://localhost:3001/api/generate/text', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      prompt: prompt,
-    }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then((data) => {
-      let recipe;
-      const jsonString = data.choices[0].message.content.match(/({[\s\S]*})/);
-
-      if (jsonString) {
-        recipe = JSON.parse(jsonString[0]);
-        console.log(recipe);
-      } else {
-        promptDenied(data.choices[0].message.content);
-        console.log('No JSON object found');
-        throw new Error('Prompt denied');
-      }
-
-      localStorage.setItem('recipeData', JSON.stringify(recipe));
-
-      return fetch('http://localhost:3001/api/generate/image', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          prompt: recipe.name,
-        }),
-      });
-    })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then((imageData) => {
-      console.log(imageData);
-      localStorage.setItem('imageData', JSON.stringify(imageData));
-    })
-    .catch((error) => {
-      console.error(error);
+  try {
+    const response = await fetch(`${window.location.origin}/api/generate/text`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+      }),
     });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+    let recipe;
+    const jsonString = data.choices[0].message.content.match(/({[\s\S]*})/);
+
+    if (jsonString) {
+      recipe = JSON.parse(jsonString[0]);
+      console.log(recipe);
+    } else {
+      promptDenied(data.choices[0].message.content);
+      console.log('No JSON object found');
+      throw new Error('Prompt denied');
+    }
+
+    localStorage.setItem('recipeData', JSON.stringify(recipe));
+
+    const imageResponse = await fetch(`${window.location.origin}/api/generate/image`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: recipe.name,
+      }),
+    });
+
+    if (!imageResponse.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const imageData = await imageResponse.json();
+    console.log(imageData);
+    localStorage.setItem('imageData', JSON.stringify(imageData));
+
+    return { recipeData: recipe, imageData: imageData };
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export function promptDenied(e) {

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 import React, { useState, useEffect} from "react";
-import { fetchData, recipeList} from "../fetch";
+import { fetchData, recipeList, retreiveRecipe} from "../fetch";
 import { saveRecipe } from "../saveRecipe";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
@@ -14,7 +14,7 @@ const DashBoard = () => {
     const [showSpinner, setShowSpinner] = useState(false);
 
     const [rList, setRList] = useState([]);
-
+    
     useEffect(() => {
       const fetchData = async () => {
         const data = await recipeList();
@@ -24,9 +24,9 @@ const DashBoard = () => {
       fetchData();
     }, []);
 
-  
-    console.log(rList);
-    let list = rList.map((recipe) => (<button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"key={recipe._id} onClick = {console.log(`${recipe.name} selected`)}>{recipe.name}</button>));
+    let list = rList.map((recipe) => (<button 
+      className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+      key={recipe._id} onClick = {console.log(`${recipe._id} was clicked`)}>{recipe.name}</button>));
 
     const handleFetchData = async (params) => {
       setShowSpinner(true);
@@ -58,35 +58,10 @@ const DashBoard = () => {
                 </button>
             </div>
             <br />
-            <div>place holder text</div>
-            <div>place holder text</div>
-            <div>place holder text</div>
+            <ul>
+                {list}
+            </ul>
         </div>
-
-        <div className="w-3/4 p-8 h-screen text-2xl">
-            <h2>Hungry but dont know what to make? </h2>
-            Type in what ingredients you have and we will make a recipe for you!
-            <br />
-            Please type them in one at a time separated by a space and a comma.
-            <br />
-            Then click the "Make New Recipe".
-            <div className="w-3/4 p-8 h-screen text-3xl">
-                {/* <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2> */}
-                <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    placeholder="Search"
-                    />
-                    <div className="mt-6 ">
-                        <button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
-                            Search
-                        </button>
-                    </div>
-                    <br></br>
-                    <ul>
-                        {list}
-                    </ul>
-             </div>
              <div className="w-3/4 p-8 h-screen text-3xl">
              <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2>
              <input
@@ -115,7 +90,7 @@ const DashBoard = () => {
                 <div className="spinner absolute bottom-1/3 right-1/3 -mt-4 -ml-4 border-t-4 border-b-4 border-purple-700 h-8 w-8 rounded-full animate-spin"></div>
             )}
         </div>
-    </div>
+    
 );  
     };
 

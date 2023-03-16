@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import React, { useState, useEffect} from "react";
 import { fetchData, recipeList, retreiveRecipe} from "../fetch";
-import { saveRecipe } from "../saveRecipe";
+// import { saveRecipe } from "../saveRecipe";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
 
@@ -142,6 +142,7 @@ const DashBoard = () => {
             {showSpinner && (
                 <div className="spinner absolute bottom-1/3 right-1/3 -mt-4 -ml-4 border-t-4 border-b-4 border-purple-700 h-8 w-8 rounded-full animate-spin"></div>
             )}
+        </div>
         </div>
     
 );  

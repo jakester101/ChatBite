@@ -37,6 +37,9 @@ ChatBite is a web application that helps users create new recipes based on the i
 
 ## Getting Started
 
+[Visit our deployed app!](https://evening-fjord-31018.herokuapp.com/)
+
+For local:
 1. Clone this repository to your local machine.
 2. Install the required dependencies by running `npm install` in the root folder of the project.
 3. Start the development server by running `npm start`. This will launch the application in your default web browser.

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import { fetchData } from "../fetch";
+import { fetchData, recipeList } from "../fetch";
 
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
-import { useMutation } from '@apollo/client';
+import { useMutation, useEffect } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 
 const DashBoard = () => {

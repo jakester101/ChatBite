@@ -9,7 +9,7 @@ import DashBoard from "./pages/DashBoard";
 import Banner from "./pages/Banner";
 
 const client = new ApolloClient({
-  uri: `https://evening-fjord-31018.herokuapp.com/graphql`, // http://localhost:3001/graphql
+  uri: `http://localhost:3001/graphql`, //https://evening-fjord-31018.herokuapp.com/graphql`,
   cache: new InMemoryCache(),
 });
 

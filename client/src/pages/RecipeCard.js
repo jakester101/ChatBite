@@ -14,7 +14,7 @@ const RecipeCard = ({ recipe, image, onSave }) => {
   ));
 
   return (
-    <div className='flex justify-center items-center h-screen flex-col gap-y-10'>
+    <div className='flex justify-center items-center h-screen flex-col gap-y-10 pt-10'>
       <div className="max-w-50vh min-h-40vh rounded overflow-hidden shadow-2xl">
         <div className='flex justify-center min-w-max py-5 bg-purple-700'>
           <img className="max-w-20vh" src={image.data[0].url} alt={recipe.name} />

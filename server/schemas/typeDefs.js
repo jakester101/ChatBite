@@ -12,7 +12,7 @@ const typeDefs = gql`
   type Recipe {
     _id: ID
     name: String
-    ingredients: [Ingredient]!
+    ingredients: String
     instructions: String
     rating: String
     prepTime: String

@@ -31,6 +31,7 @@ ChatBite is a web application that helps users create new recipes based on the i
 
 ## Technologies Used
 
+- Generative AI: OpenAI Chat Completion gpt-3.5-turbo, DALL·E
 - Frontend: React, Apollo Client, Tailwind CSS
 - Backend: Node.js, Express, GraphQL, Apollo Server
 - Database: MongoDB

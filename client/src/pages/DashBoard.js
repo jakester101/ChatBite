@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { fetchData } from "../fetch";
 import { recipeList } from "../fetch";
-import RecipeCard from './RecipeCard'; // Import RecipeCard component
+import RecipeCard from './RecipeCard';
+
 
 import { useMutation} from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
@@ -12,8 +13,9 @@ const DashBoard = () => {
     const [params, setParams] = useState("");
     const [recipe, setRecipe] = useState(null);
     const [image, setImage] = useState(null);
+    const [error, setError] = useState('');
     const [showSpinner, setShowSpinner] = useState(false);
-    const [addRecipe] = useMutation(ADD_RECIPE);
+
 
     const [rList, setRList] = useState([]);
 
@@ -25,6 +27,7 @@ const DashBoard = () => {
   
       fetchData();
     }, []);
+
 
   
     // console.log(rList);
@@ -59,7 +62,7 @@ const DashBoard = () => {
         console.log("Input data:", input);
 
         try {
-          const response = await fetch('http://localhost:3001/api/recipe', {
+          const response = await fetch(`${window.location.origin}/api/recipe`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -99,31 +102,10 @@ const DashBoard = () => {
             <br />
         
         </div>
-
-        {/* <div className="w-3/4 p-8 h-screen text-2xl"> */}
-            {/* <h2>Hungry but dont know what to make? </h2>
-            Type in what ingredients you have and we will make a recipe for you!
-            <br />
-            Please type them in one at a time separated by a space and a comma.
-            <br />
-            Then click the "Make New Recipe". */}
             <div className="w-3/4 p-8 h-screen text-3xl">
-                {/* <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2> */}
-                {/* <input
-                    type="text"
-                    className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                    placeholder="Search"
-                    /> */}
-                    {/* <div className="mt-6 "> */}
-                        {/* <button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
-                            Search
-                        </button> */}
-                    {/* </div> */}
-                    {/* <br></br> */}
                     <ul>
                         {list}
                     </ul>
-             {/* </div> */}
              <div className="w-3/4 p-8 h-screen text-3xl">
              <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2>
              <input

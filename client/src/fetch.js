@@ -24,7 +24,7 @@ export async function fetchData(params) {
       recipe = JSON.parse(jsonString[0]);
       console.log(recipe);
     } else {
-      promptDenied(data.choices[0].message.content);
+      alert(data.choices[0].message.content);
       console.log('No JSON object found');
       throw new Error('Prompt denied');
     }
@@ -56,9 +56,6 @@ export async function fetchData(params) {
   }
 }
 
- function promptDenied(e) {
-  console.log(e);
-}
 
 
 

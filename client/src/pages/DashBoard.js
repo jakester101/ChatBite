@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
 
+
 import React, { useState, useEffect} from "react";
 import { fetchData, recipeList, retreiveRecipe} from "../fetch";
 import { saveRecipe } from "../saveRecipe";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
+
 
 import Banner from "./Banner";
 import { useMutation } from '@apollo/client';
@@ -15,8 +17,9 @@ const DashBoard = () => {
     const [params, setParams] = useState("");
     const [recipe, setRecipe] = useState(null);
     const [image, setImage] = useState(null);
+    const [error, setError] = useState('');
     const [showSpinner, setShowSpinner] = useState(false);
-    const [addRecipe] = useMutation(ADD_RECIPE);
+
 
     const [rList, setRList] = useState([]);
     
@@ -29,10 +32,10 @@ const DashBoard = () => {
       fetchData();
     }, []);
 
+
     let list = rList.map((recipe) => (<button 
       className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
       key={recipe._id} onClick = {console.log(`${recipe._id} was clicked`)}>{recipe.name}</button>));
-
 
     const handleFetchData = async (params) => {
       setShowSpinner(true);
@@ -63,7 +66,7 @@ const DashBoard = () => {
         console.log("Input data:", input);
 
         try {
-          const response = await fetch('http://localhost:3001/api/recipe', {
+          const response = await fetch(`${window.location.origin}/api/recipe`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -101,6 +104,7 @@ const DashBoard = () => {
                 </button>
             </div>
             <br />
+
 
             <ul>
                 {list}

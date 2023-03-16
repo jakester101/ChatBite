@@ -90,8 +90,8 @@ const DashBoard = () => {
     
     
     return (
-      <div style={{fontFamily:'Space Mono'}} className="w-full flex justify-center h-screen bg-white">
-        <div className="w-1/4 p-8 border-solid border-r-4 h-screen text-center">
+      <div style={{fontFamily:'Space Mono'}} className="w-full flex justify-center min-h-screen bg-white">
+        <div className="w-1/4 p-8 border-solid border-r-4  text-center">
             Previous Recipes
             <input
                 type="text"
@@ -110,7 +110,7 @@ const DashBoard = () => {
                 {list}
             </ul>
         </div>
-             <div className="w-3/4 p-8 h-screen text-3xl">
+             <div className="w-3/4 p-8 text-3xl">
 
              <div className="w-3/4 p-8 h-screen text-3xl text-center">
 
@@ -134,9 +134,9 @@ const DashBoard = () => {
                     </button>
                     <br></br>
                 </div>
-                <div className="flex justify-center items-center h-full">
-                    
+                <div className="flex justify-center items-center " style={{ height: "fit-content", overflowY: "auto" }}>
                     <RecipeCard recipe={recipe} image={image} onSave={saveRecipe} />
+
                 </div>
             </div>
             {showSpinner && (

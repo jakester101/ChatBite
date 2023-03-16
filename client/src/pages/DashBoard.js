@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { fetchData } from "../fetch";
-import { recipeList } from "../fetch";
-import RecipeCard from './RecipeCard';
 
 
-import { useMutation} from '@apollo/client';
+
+import React, { useState, useEffect} from "react";
+import { fetchData, recipeList, retreiveRecipe} from "../fetch";
+import { saveRecipe } from "../saveRecipe";
+import RecipeCard from './RecipeCard'; // Import RecipeCard component
+
+
+import Banner from "./Banner";
+import { useMutation } from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 
 const DashBoard = () => {
@@ -18,7 +22,7 @@ const DashBoard = () => {
 
 
     const [rList, setRList] = useState([]);
-
+    
     useEffect(() => {
       const fetchData = async () => {
         const data = await recipeList();
@@ -29,9 +33,9 @@ const DashBoard = () => {
     }, []);
 
 
-  
-    // console.log(rList);
-    let list = rList.map((recipe) => (<button className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"key={recipe._id} onClick = {console.log(`${recipe.name} selected`)}>{recipe.name}</button>));
+    let list = rList.map((recipe) => (<button 
+      className="w-full shadow-xl px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+      key={recipe._id} onClick = {console.log(`${recipe._id} was clicked`)}>{recipe.name}</button>));
 
     const handleFetchData = async (params) => {
       setShowSpinner(true);
@@ -86,8 +90,8 @@ const DashBoard = () => {
     
     
     return (
-      <div className="w-full flex justify-center h-screen">
-        <div className="w-1/4 p-8 border-solid border-r-4 h-screen">
+      <div style={{fontFamily:'Space Mono'}} className="w-full flex justify-center h-screen bg-white">
+        <div className="w-1/4 p-8 border-solid border-r-4 h-screen text-center">
             Previous Recipes
             <input
                 type="text"
@@ -100,13 +104,16 @@ const DashBoard = () => {
                 </button>
             </div>
             <br />
-        
+
+
+            <ul>
+                {list}
+            </ul>
         </div>
-            <div className="w-3/4 p-8 h-screen text-3xl">
-                    <ul>
-                        {list}
-                    </ul>
              <div className="w-3/4 p-8 h-screen text-3xl">
+
+             <div className="w-3/4 p-8 h-screen text-3xl text-center">
+
              <h2>Hungry but dont know what to make?<br />Type in what ingredients you have and we will make a recipe for you!</h2>
              <input
                 type="text"
@@ -125,8 +132,10 @@ const DashBoard = () => {
                     >
                         Make New Recipe
                     </button>
+                    <br></br>
                 </div>
                 <div className="flex justify-center items-center h-full">
+                    
                     <RecipeCard recipe={recipe} image={image} onSave={saveRecipe} />
                 </div>
             </div>
@@ -134,7 +143,7 @@ const DashBoard = () => {
                 <div className="spinner absolute bottom-1/3 right-1/3 -mt-4 -ml-4 border-t-4 border-b-4 border-purple-700 h-8 w-8 rounded-full animate-spin"></div>
             )}
         </div>
-    </div>
+    
 );  
     };
 

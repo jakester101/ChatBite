@@ -129,3 +129,22 @@ export async function recipeList(){
     throw err;
   }
 }
+
+export async function retreiveRecipe(id){
+    try{
+      const response = await fetch(`${window.location.origin}/api/recipe/query/${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      if(!response.ok){
+        throw new Error('Network response was no ok');
+      }
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } catch(err){console.error(err);
+    throw err;
+  }
+};

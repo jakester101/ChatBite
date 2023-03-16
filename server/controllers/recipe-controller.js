@@ -15,14 +15,15 @@ module.exports = {
         }
         res.status(200).json(recipe);
     },
-    async createRecipe({body}, res){
-        const recipe = await Recipe.create(body);
-        if(!recipe){
-            return res.status(400).json({message: "unable to create recipe"})
+    async createRecipe(req, res) {
+        try {
+          const recipe = await Recipe.create(req.body);
+          res.status(200).json(recipe);
+        } catch (error) {
+          console.error("Error creating recipe:", error);
+          res.status(400).json({ message: "Unable to create recipe" });
         }
-        res.status(200).json(recipe);
-
-    },
+    },      
     async updateRecipe(req, res){
         const recipe = await Recipe.findOneAndUpdate(
             {}

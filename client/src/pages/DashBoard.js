@@ -4,7 +4,7 @@ import { fetchData } from "../fetch";
 import { recipeList } from "../fetch";
 import RecipeCard from './RecipeCard'; // Import RecipeCard component
 
-import { useMutation, useEffect } from '@apollo/client';
+import { useMutation} from '@apollo/client';
 import { ADD_RECIPE } from '../utils/mutations';
 
 const DashBoard = () => {
@@ -56,11 +56,23 @@ const DashBoard = () => {
           prepTime: recipeData.prepTime,
           image: imageData.data[0].url
         };
-    
+        console.log("Input data:", input);
+
         try {
-          // Call the addRecipe mutation
-          const { data } = await addRecipe({ variables: input });
-          console.log("Recipe added:", data);
+          const response = await fetch('http://localhost:3001/api/recipe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(input),
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            console.log("Recipe added:", data);
+          } else {
+            throw new Error('Network response was not ok');
+          }
         } catch (error) {
           console.error("Error adding recipe:", error);
         }
@@ -68,6 +80,7 @@ const DashBoard = () => {
         console.log("No data to save");
       }
     };
+    
     
     return (
       <div className="w-full flex justify-center h-screen">
@@ -84,9 +97,7 @@ const DashBoard = () => {
                 </button>
             </div>
             <br />
-            <div>place holder text</div>
-            <div>place holder text</div>
-            <div>place holder text</div>
+        
         </div>
 
         {/* <div className="w-3/4 p-8 h-screen text-2xl"> */}
